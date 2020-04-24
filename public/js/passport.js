@@ -2,6 +2,7 @@
 var passport = require("passport"),
   GitHubStrategy = require("passport-github2").Strategy;
 var db = require("../../models");
+var keys = require("../../keys");
 var uid = "";
 
 passport.serializeUser(function(user, done) {
@@ -28,8 +29,8 @@ passport.deserializeUser(async (id, done) => {
 passport.use(
   new GitHubStrategy(
     {
-      clientID: "1a0c9a6167a639262425",
-      clientSecret: "ceabf4a109a5e27f9327c78c04a74e515f443737",
+      clientID: keys.gitClientID,
+      clientSecret: keys.gitClientSecret,
       callbackURL: "https://project-2-znnm.herokuapp.com/auth/github/callback"
     },
     function(accessToken, refreshToken, profile, done) {
@@ -41,10 +42,6 @@ passport.use(
       })
         .then(([user, created]) => {
           uid = user.uid;
-          // console.log(user.get({
-          //   plain: true
-          // }))
-          // console.log(created)
           return done(null, profile);
         })
         .error(function(err) {
