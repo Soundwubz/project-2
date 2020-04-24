@@ -31,7 +31,7 @@ passport.use(
     {
       clientID: keys.gitClientID,
       clientSecret: keys.gitClientSecret,
-      callbackURL: "https://project-2-znnm.herokuapp.com/auth/github/callback"
+      callbackURL: "https://purlwise.herokuapp.com/auth/github/callback"
     },
     function(accessToken, refreshToken, profile, done) {
       var gitUserName = profile.username;
